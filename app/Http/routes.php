@@ -30,6 +30,21 @@ Route::get('edad/{edad}', function ($edad) {
     return "Mi edad es: ". $edad;
 });
 
+// Ruta controlador
+Route::get('controlador', 'PruebaController@index');
+Route::get('name/{nombre}', 'PruebaController@nombre');
+
+//Verb	Path	Action	Route Name
+//GET	/photo	index	photo.index
+//GET	/photo/create	create	photo.create
+//POST	/photo	store	photo.store
+//GET	/photo/{photo}	show	photo.show
+//GET	/photo/{photo}/edit	edit	photo.edit
+//PUT/PATCH	/photo/{photo}	update	photo.update
+//DELETE	/photo/{photo}	destroy	photo.destroy
+
+Route::resource('movie', 'MovieController');
+
 Route::get('/', function () {
     return view('welcome');
 });
