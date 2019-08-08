@@ -12,7 +12,11 @@ class CreateGenresTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('genres', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('genre');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +26,6 @@ class CreateGenresTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('genres');
     }
 }

@@ -43,8 +43,9 @@ Route::get('name/{nombre}', 'PruebaController@nombre');
 //PUT/PATCH	/photo/{photo}	update	photo.update
 //DELETE	/photo/{photo}	destroy	photo.destroy
 
+Route::get('/', 'FrontController@index');
+Route::get('/contacto', 'FrontController@contacto');
+Route::get('/reviews', 'FrontController@reviews');
 Route::resource('movie', 'MovieController');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
