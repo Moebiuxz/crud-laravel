@@ -2,11 +2,14 @@
 
 namespace Cinema\Http\Controllers;
 
+use Cinema\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Http\Request;
 
 use Cinema\Http\Requests;
 use Cinema\Http\Controllers\Controller;
-
+use Cinema\User;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 class UsuarioController extends Controller
 {
     /**
@@ -16,7 +19,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $users = \Cinema\User::all();
+        $users = User::all();
         return view('usuario.index', compact('users'));
     }
 
@@ -38,10 +41,10 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        \Cinema\User::create([
-            'name' => $request['nombre'],
+        User::create([
+            'name' => $request['name'],
             'email' => $request['email'],
-            'password' => bcrypt($request['password'])
+            'password' => $request['password']
         ]);
         return redirect('/usuario')->with('message', 'store');
     }
@@ -65,7 +68,8 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('usuario.edit', ['user' => $user]);
     }
 
     /**
@@ -77,7 +81,12 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->fill($request->all());
+        $user->save();
+
+        Session::flash('message', 'Usuario actualizado de forma correcta!');
+        return Redirect::to('/usuario');
     }
 
     /**
