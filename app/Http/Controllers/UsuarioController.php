@@ -99,8 +99,14 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        $user = User::find($id);
+        $user->delete();
         Session::flash('message', 'Usuario eliminado de forma correcta!');
         return Redirect::to('/usuario');
+
+        /* Versión antigua
+         * User::destroy($id);
+        Session::flash('message', 'Usuario eliminado de forma correcta!');
+        return Redirect::to('/usuario');*/
     }
 }
