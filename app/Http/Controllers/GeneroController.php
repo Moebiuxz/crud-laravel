@@ -17,7 +17,16 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        return view('genero.index');
+    }
+
+    public function listing()
+    {
+        $genres = Genre::all();
+
+        return response()->json([
+            $genres->toArray()
+        ]);
     }
 
     /**

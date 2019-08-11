@@ -1,4 +1,5 @@
 $("#registro").click(function () {
+    console.log('Entró');
     var dato = $("#genre").val();
     var route = "http://localhost:8000/genero";
     var token = $("#token").val();
